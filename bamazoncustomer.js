@@ -19,3 +19,7 @@ connection.query('SELECT * FROM Products', function(err, res){
     console.log("ID: " + res[i].ItemID + " | " + "Product: " + res[i].ProductName + " | " + "Department: " + res[i].DepartmentName + " | " + "Price: " + res[i].Price + " | " + "QTY: " + res[i].StockQuantity);
  
   }
+ inquirer.prompt([
+    {
+      
+    ]) 
