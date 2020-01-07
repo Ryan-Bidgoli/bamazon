@@ -104,3 +104,60 @@ function viewLowInventory(){
       })
   });
   }
+  
+  function addNewProduct(){
+  console.log('>>>>>>Adding New Product<<<<<<');
+  var deptNames = [];
+
+  //grab name of departments
+  connection.query('SELECT * FROM Departments', function(err, res){
+    if(err) throw err;
+    for(var i = 0; i<res.length; i++){
+      deptNames.push(res[i].DepartmentName);
+    }
+  })
+
+  inquirer.prompt([{
+    type: "input",
+    name: "product",
+    message: "Product: ",
+    validate: function(value){
+      if(value){return true;}
+      else{return false;}
+    }
+  }, {
+    type: "list",
+    name: "department",
+    message: "Department: ",
+    choices: deptNames
+  }, {
+    type: "input",
+    name: "price",
+    message: "Price: ",
+    validate: function(value){
+      if(isNaN(value) === false){return true;}
+      else{return false;}
+    }
+  }, {
+    type: "input",
+    name: "quantity",
+    message: "Quantity: ",
+    validate: function(value){
+      if(isNaN(value) == false){return true;}
+      else{return false;}
+    }
+  }]).then(function(ans){
+    connection.query('INSERT INTO Products SET ?',{
+      ProductName: ans.product,
+      DepartmentName: ans.department,
+      Price: ans.price,
+      StockQuantity: ans.quantity
+    }, function(err, res){
+      if(err) throw err;
+      console.log('Another item was added to the store.');
+    })
+    start();
+  });
+}
+
+start();
