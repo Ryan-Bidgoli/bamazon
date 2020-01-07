@@ -9,3 +9,10 @@ var connection = mysql.createConnection({
   password: "",
   database: "Bamazon"
 })
+
+function start(){
+
+connection.query('SELECT * FROM Products', function(err, res){
+  if(err) throw err;
+
+  }
