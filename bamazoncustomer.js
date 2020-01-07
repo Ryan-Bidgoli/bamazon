@@ -43,4 +43,10 @@ connection.query('SELECT * FROM Products', function(err, res){
           return true;
         }
       }
-    ]) 
+    ]) .then(function(ans){
+      var whatToBuy = (ans.id)-1;
+      var howMuchToBuy = parseInt(ans.qty);
+      var grandTotal = parseFloat(((res[whatToBuy].Price)*howMuchToBuy).toFixed(2));
+
+}
+ 
