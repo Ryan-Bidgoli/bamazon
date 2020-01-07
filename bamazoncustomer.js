@@ -84,4 +84,18 @@ connection.query('SELECT * FROM Products', function(err, res){
     })
 })
 }
- 
+ function reprompt(){
+  inquirer.prompt([{
+    type: "confirm",
+    name: "reply",
+    message: "Would you like to purchase another item?"
+  }]).then(function(ans){
+    if(ans.reply){
+      start();
+    } else{
+      console.log("See you soon!");
+    }
+  });
+}
+
+start(); 
