@@ -60,3 +60,16 @@ function viewLowInventory(){
   start();
   });
 }
+
+ function addToInventory()
+  {
+   
+  connection.query('SELECT * FROM Products', function(err, res)
+  {
+  if(err) throw err;
+  var itemArray = [];
+  
+  for(var i=0; i<res.length; i++){
+    itemArray.push(res[i].ProductName);
+  }
+  }
