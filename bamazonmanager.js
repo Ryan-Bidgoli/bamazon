@@ -72,4 +72,35 @@ function viewLowInventory(){
   for(var i=0; i<res.length; i++){
     itemArray.push(res[i].ProductName);
   }
+    
+  inquirer.prompt([{
+    type: "list",
+    name: "product",
+    choices: itemArray,
+    message: "Which item would you like to add inventory?"
+  }, {
+    type: "input",
+    name: "qty",
+    message: "How much would you like to add?",
+    validate: function(value){
+      if(isNaN(value) === false){return true;}
+      else{return false;}
+    }
+    }]).then(function(ans){
+      var currentQty;
+      for(var i=0; i<res.length; i++){
+        if(res[i].ProductName === ans.product){
+          currentQty = res[i].StockQuantity;
+        }
+      }
+      connection.query('UPDATE Products SET ? WHERE ?', [
+        {StockQuantity: currentQty + parseInt(ans.qty)},
+        {ProductName: ans.product}
+        ], function(err, res){
+          if(err) throw err;
+          console.log('The quantity was updated.');
+          start();
+        });
+      })
+  });
   }
