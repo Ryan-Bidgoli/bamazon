@@ -10,6 +10,11 @@ var connection = mysql.createConnection({
 })
 
 
+connection.connect(function(err){
+  if(err) throw err;
+  start();
+});
+
 function start(){
   inquirer.prompt([{
     type: "list",
@@ -32,7 +37,7 @@ function start(){
 }
 
 function viewProducts(){
-
+  console.log('>>>>>>Viewing Products<<<<<<');
   connection.query('SELECT * FROM Products', function(err, res){
   if(err) throw err;
   
@@ -46,8 +51,7 @@ function viewProducts(){
 }
 
 function viewLowInventory(){
- 
-
+  console.log('>>>>>>Viewing Low Inventory<<<<<<');
   connection.query('SELECT * FROM Products', function(err, res){
   if(err) throw err;
    
@@ -63,7 +67,7 @@ function viewLowInventory(){
 
  function addToInventory()
   {
-   
+  console.log('>>>>>>Adding to Inventory<<<<<<');
   connection.query('SELECT * FROM Products', function(err, res)
   {
   if(err) throw err;
@@ -103,7 +107,7 @@ function viewLowInventory(){
         });
       })
   });
-  }
+ }
   
   function addNewProduct(){
   console.log('>>>>>>Adding New Product<<<<<<');
@@ -160,4 +164,4 @@ function viewLowInventory(){
   });
 }
 
-start();
+ 
