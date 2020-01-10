@@ -10,6 +10,11 @@ var connection = mysql.createConnection({
   database: "Bamazon"
 })
 
+connection.connect(function(err){
+  if(err) throw err;
+  start();
+});
+
 function start(){
 
 connection.query('SELECT * FROM Products', function(err, res){
@@ -98,4 +103,4 @@ connection.query('SELECT * FROM Products', function(err, res){
   });
 }
 
-start(); 
+ 
