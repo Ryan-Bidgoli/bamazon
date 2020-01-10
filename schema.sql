@@ -1,3 +1,5 @@
+drop database if exists Bamazon;
+
 CREATE DATABASE Bamazon;
 
 USE Bamazon;
@@ -45,3 +47,7 @@ VALUES ('ENTERTAINMENT', 50000.00, 15000.00),
     ('CLOTHING', 35000.00, 15000.00),
     ('SPORTS & OUTDOORS', 12000.00, 12000.00);
               
+use Bamazon;    
+select * from products;
+select * from departments;
+select * from manager;
