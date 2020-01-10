@@ -10,6 +10,11 @@ var connection = mysql.createConnection({
 })
 
 
+connection.connect(function(err){
+  if(err) throw err;
+  start();
+});
+
 function start(){
   inquirer.prompt([{
     type: "list",
@@ -31,9 +36,13 @@ function viewProductByDept(){
  
   connection.query('SELECT * FROM Departments', function(err, res){
     if(err) throw err;
-    
+    console.log('>>>>>>Product Sales by Department<<<<<<');
+     console.log('----------------------------------------------------------------------------------------------------')
+
     for(var i = 0; i<res.length;i++){
       console.log("Department ID: " + res[i].DepartmentID + " | " + "Department Name: " + res[i].DepartmentName + " | " + "Over Head Cost: " + (res[i].OverHeadCosts).toFixed(2) + " | " + "Product Sales: " + (res[i].TotalSales).toFixed(2) + " | " + "Total Profit: " + (res[i].TotalSales - res[i].OverHeadCosts).toFixed(2));
+      console.log('----------------------------------------------------------------------------------------------------')
+
     }
     start();
   })
@@ -79,4 +88,4 @@ function createNewDept(){
     });
   }
 
-start();
+ 
